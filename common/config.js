@@ -5,7 +5,7 @@
 const _ = require('lodash'),
   moment = require('moment');
 
-const allowDomain = ['rayjump.com', 'www.heiniubao.com', 'wap.newtank.cn', 'www.ycj1058.cn', 'www.redceph.cn'];
+const allowDomain = [];
 
 module.exports = {
   DEV: 'development',
