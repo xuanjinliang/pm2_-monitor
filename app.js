@@ -6,13 +6,25 @@ const onerror = require('koa-onerror');
 const bodyparser = require('koa-bodyparser');
 const logger = require('koa-logger');
 
+const compress = require('koa-compress');
+const sse = require('koa-sse-stream');
+
 const index = require('./routes/index');
 const users = require('./routes/users');
+const sseRoutes = require('./routes/sse');
 
 // error handler
 onerror(app);
 
+//使用gzip压缩
+app.use(compress({threshold: 2048}));
+
 // middlewares
+app.use(sse({
+  maxClients: 1000,
+  pingInterval: 30000
+}));
+
 app.use(bodyparser({
   enableTypes: ['json', 'form', 'text']
 }));
@@ -35,6 +47,7 @@ app.use(async (ctx, next) => {
 // routes
 app.use(index.routes(), index.allowedMethods());
 app.use(users.routes(), users.allowedMethods());
+app.use(sseRoutes.routes(), sseRoutes.allowedMethods());
 
 // error-handling
 app.on('error', (err, ctx) => {
