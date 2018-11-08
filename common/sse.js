@@ -12,7 +12,7 @@ class SSETransform extends Transform {
       writableObjectMode: true
     });
 
-    this.ctx = ctx;
+    /*this.ctx = ctx;*/
     this.opts = opts;
     ctx.set({
       'Content-Type': 'text/event-stream',
@@ -75,10 +75,6 @@ class SSETransform extends Transform {
 
     this.push(resultArray.join('\n') + '\n\n');
     callback();
-  }
-  _final(done){
-    this.push('');
-    done();
   }
 }
 

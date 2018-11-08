@@ -7,7 +7,6 @@ const bodyparser = require('koa-bodyparser');
 const logger = require('koa-logger');
 
 const compress = require('koa-compress');
-//const sse = require('koa-sse-stream');
 
 const index = require('./routes/index');
 const users = require('./routes/users');
@@ -22,12 +21,6 @@ app.use(compress({
   threshold: 2048,
   flush: require('zlib').Z_SYNC_FLUSH
 }));
-
-// middlewares
-/*app.use(sse({
-  maxClients: 1000,
-  pingInterval: 30000
-}));*/
 
 app.use(bodyparser({
   enableTypes: ['json', 'form', 'text']
@@ -52,10 +45,6 @@ app.use(async (ctx, next) => {
 app.use(index.routes(), index.allowedMethods());
 app.use(users.routes(), users.allowedMethods());
 
-/*app.use(sse({
-  maxClients: 1000,
-  pingInterval: 30000
-}));*/
 app.use(sseRoutes.routes(), sseRoutes.allowedMethods());
 app.use(streamRoutes.routes(), streamRoutes.allowedMethods());
 
