@@ -15,14 +15,17 @@ function setCrossOrigin(ctx){
     domainReg = config.devDomain;
   }
 
-  if(req.headers.origin && domainReg.find((str) => req.headers.origin.match(str))){
+  /*if(req.headers.origin && domainReg.find((str) => req.headers.origin.match(str))){
     res.set({
       "Access-Control-Allow-Origin": req.headers.origin,
       "Access-Control-Allow-Methods": "POST,GET",
       "Access-Control-Allow-Credentials": "true"
     });
-  }
-
+  }*/
+  res.set({
+    "Access-Control-Allow-Origin": '*',
+    "Access-Control-Allow-Methods": "POST,GET"
+  });
 }
 
 module.exports = setCrossOrigin;
