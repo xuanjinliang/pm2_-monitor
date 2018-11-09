@@ -15,7 +15,7 @@ class SendStream extends Transform {
 
   filter(data){
     if(_.isPlainObject(data)){
-      return JSON.stringify(data)
+      return JSON.stringify(data);
     }
 
     return data.toString();
