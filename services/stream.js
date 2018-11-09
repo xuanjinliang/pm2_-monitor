@@ -12,7 +12,6 @@ module.exports = async (ctx, next) => {
   setInterval(() => {
     sendStream.send({aa:123});
   }, 3000);
-  console.log(123123);
 
   ctx.body = sendStream.on('error', ctx.onerror).pipe(PassThrough());
 };

@@ -12,7 +12,7 @@ async function getPm2List() {
           reject(err);
         }
         pm2.disconnect();
-        resolve(processDescriptionList)
+        resolve(processDescriptionList);
       });
     });
   }catch (err) {

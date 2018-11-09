@@ -1,5 +1,4 @@
 const router = require('koa-router')();
-const Stream = require('stream');
 
 router.get('/', async (ctx, next) => {
   await ctx.render('index', {
@@ -12,10 +11,9 @@ router.get('/string', async (ctx, next) => {
 });
 
 router.get('/json', async (ctx, next) => {
-  console.log(ctx.body instanceof Stream);
   ctx.body = {
     title: 'koa2 json'
-  }
+  };
 });
 
 module.exports = router;

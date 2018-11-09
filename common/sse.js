@@ -73,19 +73,9 @@ class SSETransform extends Transform {
       resultArray.push(`data: ${senderObject.data}`);
     }
 
-    this.push(resultArray.join('\n') + '\n\n');
+    this.push(`${resultArray.join('\n')}\n\n`);
     callback();
   }
 }
-
-
-/*let sseTransform = new SSETransform();
-sseTransform.on('finish', () => {
-  console.log('finish');
-});
-sseTransform.pipe(process.stdout);
-sseTransform.send({data:{aa:123}});
-sseTransform.send('321');
-sseTransform.end();*/
 
 module.exports = SSETransform;
