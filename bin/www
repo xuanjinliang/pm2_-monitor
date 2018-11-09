@@ -12,7 +12,7 @@ const http = require('http');
  * Get port from environment and store in Express.
  */
 
-const port = normalizePort(process.env.PORT || '3002');
+const port = normalizePort(process.env.PORT || '8001');
 // app.set('port', port);
 
 /**
@@ -20,6 +20,8 @@ const port = normalizePort(process.env.PORT || '3002');
  */
 
 let server = http.createServer(app.callback());
+
+require('../common/socket')(server);
 
 /**
  * Listen on provided port, on all network interfaces.
