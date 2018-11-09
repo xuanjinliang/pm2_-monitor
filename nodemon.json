@@ -9,6 +9,7 @@
       ".eslintrc",
       ".gitignore",
       "favicon.ico",
+      "testScript",
       "app.json"
     ],
     "verbose": true,
