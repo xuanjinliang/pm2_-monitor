@@ -73,7 +73,7 @@ class SSETransform extends Transform {
       resultArray.push(`data: ${senderObject.data}`);
     }
 
-    this.push(resultArray.join('\n') + '\n\n');
+    this.push(`${resultArray.join('\n')}\n\n`);
     callback();
   }
 }
