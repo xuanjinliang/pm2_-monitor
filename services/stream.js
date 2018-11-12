@@ -5,7 +5,7 @@
 const PassThrough = require('stream').PassThrough;
 const SendStream = require('../common/sendStream');
 
-module.exports = async (ctx, next) => {
+module.exports = (ctx) => {
 
   let sendStream = new SendStream();
 

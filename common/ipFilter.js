@@ -7,18 +7,16 @@ let config = require('./config');
 function setIpFilter(ctx){
 
   let req = ctx.request,
-    domainReg = config.productIpList,
-    ip = (req.headers['x-forwarded-for'] || req.headers['x-real-ip'] || req.ip).toString().split(',')[0].trim();
+    ipReg = config.productIpList,
+    ip = (req.headers['x-forwarded-for'] || req.headers['x-real-ip'] || req.ip || (req.connection && req.connection.remoteAddress)).toString().split(',')[0].trim();
 
-  if(req.app.env === config.DEV){
-    domainReg = config.devIpList;
+  if(process.env.NODE_ENV === config.DEV){
+    ipReg = config.devIpList;
+  }else if(process.env.NODE_ENV === config.TEST){
+    ipReg = config.testIpList;
   }
 
-  if(req.app.env === config.TEST){
-    domainReg = config.testIpList;
-  }
-
-  return domainReg.find((str) => ip.match(str));
+  return ipReg.find((str) => ip.match(str));
 }
 
 module.exports = setIpFilter;
