@@ -4,10 +4,12 @@
 
 const router = require('koa-router')();
 const streamServer = require('../services/stream');
-//const setCrossOrigin = require('../common/setCrossOrigin');
+const ipFilter = require('../common/ipFilter');
 
 router.get('/stream', async (ctx, next) => {
-  //setCrossOrigin(ctx);
+  if(!ipFilter(ctx)){
+    return await next();
+  }
   await streamServer(ctx, next);
 });
 
