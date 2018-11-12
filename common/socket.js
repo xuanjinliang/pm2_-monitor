@@ -3,14 +3,30 @@
  */
 
 const pm2Script = require('../pm2Script/index');
+const config = require('../common/config');
+const ipFilter = require('../common/ipFilter');
 
 module.exports = (server) => {
   let io = require('socket.io')(server, {
     path: '/socket',
-    serveClient: false
+    serveClient: false,
+    origins: (() => {
+      let ori = config.productionDomain;
+      if(process.env.NODE_ENV == config.DEV){
+        ori = config.devDomain;
+      }else if(process.env.NODE_ENV == config.TEST){
+        ori = config.testDomain;
+      }
+      return ori;
+    })()
   });
 
   io.on('connection', (socket) => {
+
+    if(!ipFilter(socket)){
+      socket.disconnect(true);
+      return;
+    }
 
     /*socket.on('disconnect', function(){
       console.log('user disconnected');
