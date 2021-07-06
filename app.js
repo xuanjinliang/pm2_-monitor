@@ -8,8 +8,8 @@ const logger = require('koa-logger');
 
 const compress = require('koa-compress');
 
-/*const index = require('./routes/index');
-const users = require('./routes/users');*/
+const index = require('./routes/index');
+const users = require('./routes/users');
 const sseRoutes = require('./routes/sse');
 const streamRoutes = require('./routes/stream');
 
@@ -42,8 +42,8 @@ app.use(async (ctx, next) => {
 });
 
 // routes
-/*app.use(index.routes(), index.allowedMethods());
-app.use(users.routes(), users.allowedMethods());*/
+app.use(index.routes(), index.allowedMethods());
+app.use(users.routes(), users.allowedMethods());
 
 app.use(sseRoutes.routes(), sseRoutes.allowedMethods());
 app.use(streamRoutes.routes(), streamRoutes.allowedMethods());
